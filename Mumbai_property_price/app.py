@@ -63,7 +63,8 @@ def predict_price():
 
 if __name__ == "__main__":
 	predict_price()
-	predict_price()
+
+
 
 
 
