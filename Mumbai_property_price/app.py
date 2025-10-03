@@ -37,7 +37,7 @@ def build_feature_row(columns, area_sqft, bathrooms, bhk, location_name):
 	return row.reshape(1, -1)
 
 
-def main():
+def predict_price():
 	st.title("Mumbai Property Price Predictor")
 	st.write("Enter property details")
 
@@ -59,6 +59,4 @@ def main():
 
 
 if __name__ == "__main__":
-	main()
-
-
+	predict_price()
