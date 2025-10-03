@@ -53,10 +53,17 @@ def predict_price():
 		try:
 			prediction = _model.predict(features)
 			price_value = float(prediction[0])
-			st.success(f"Estimated Price: {price_value:.2f} Cr")
+			if price_value < 0:
+				st.error("Property doesn't exist")
+			else:
+				st.success(f"Estimated Price: {price_value:.2f} Cr")
 		except Exception as e:
 			st.error(f"Prediction failed: {e}")
 
 
 if __name__ == "__main__":
 	predict_price()
+
+if __name__ == "__main__":
+	predict_price()
+
