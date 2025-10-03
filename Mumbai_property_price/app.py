@@ -41,20 +41,20 @@ def predict_price():
 	st.title("Mumbai Property Price Predictor")
 	st.write("Enter property details")
 
-	area_sqft = st.number_input("Total area (sqft)", min_value=100.0, max_value=20000.0, step=10.0)
-	bhk = st.number_input("BHK", min_value=1, max_value=12, step=1)
-	bathrooms = st.number_input("Bathrooms", min_value=1, max_value=10, step=1)
+	area_sqft = st.number_input("Total area (sqft)", min_value=100.0, max_value=20000.0, step=10.0, key="area_sqft_input")
+	bhk = st.number_input("BHK", min_value=1, max_value=12, step=1, key="bhk_input")
+	bathrooms = st.number_input("Bathrooms", min_value=1, max_value=10, step=1, key="bathrooms_input")
 
 	location_columns = [c for c in _columns if c not in ("builduparea_sqft", "bathrooms", "bhk", "other", "others")]
-	location = st.selectbox("Location", options=sorted(location_columns))
+	location = st.selectbox("Location", options=sorted(location_columns), key="location_select")
 
-	if st.button("Predict Price"):
+	if st.button("Predict Price", key="predict_button"):
 		features = build_feature_row(_columns, area_sqft, bathrooms, bhk, location)
 		try:
 			prediction = _model.predict(features)
 			price_value = float(prediction[0])
 			if price_value < 0:
-				st.error("Invalid property parameters")
+				st.error("Such property isn't listed")
 			else:
 				st.success(f"Estimated Price: {price_value:.2f} Cr")
 		except Exception as e:
@@ -63,8 +63,7 @@ def predict_price():
 
 if __name__ == "__main__":
 	predict_price()
-
-if __name__ == "__main__":
 	predict_price()
+
 
 
